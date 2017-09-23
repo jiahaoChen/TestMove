@@ -8,6 +8,9 @@ Window {
     height: 480
     title: qsTr("Hello World")
     color: Qt.rgba(1,1,1,1)
+    property int xRotVal: Math.floor(Math.random()*360)
+    property int yRotVal: Math.floor(Math.random()*360)
+    property int zRotVal: Math.floor(Math.random()*360)
     Rectangle {
         anchors.fill: parent
         color: Qt.rgba(1,1,1,1)
@@ -19,14 +22,12 @@ Window {
             width: 200
             height: 200
             source: "/Users/jiahao/Documents/logo.png"
-            transform: Rotation {
-                origin.x: ball.x/2;
-                origin.y: ball.y/2;
-                axis {
-                    x: 1; y: 0; z: 0
-                }
-                angle: 180
-            }
+            transform:
+            [
+                Rotation {id:yRotation; origin.x: 30; origin.y: 30; axis { x: 0; y: 1; z: 0 } angle: yRotVal },
+                Rotation {id:xRotation; origin.x: 30; origin.y: 30; axis { x: 1; y: 0; z: 0 } angle: xRotVal },
+                Rotation {id:zRotation; origin.x: 30; origin.y: 30; axis { x: 0; y: 0; z: 1 } angle: zRotVal }
+            ]
             smooth: true
         }
 
@@ -141,6 +142,13 @@ Window {
             onTriggered: {
                 ball.x = Math.floor((Math.random() * root.width-ball.width) + 1);
                 ball.y = Math.floor((Math.random() * root.height-ball.height) + 1);
+//                ball.xRotation.angle = Math.floor(Math.random()*360);
+//                ball.transform.yRotation.angle = Math.floor(Math.random()*360);
+//                ball.transform.zRotation.angle = Math.floor(Math.random()*360);
+//                ball.xRoation.origin.x = 10;
+                xRotVal = Math.floor(Math.random()*360);
+                yRotVal = Math.floor(Math.random()*360);
+                zRotVal = Math.floor(Math.random()*360);
             }
         }
 
